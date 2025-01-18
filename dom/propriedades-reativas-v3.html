@@ -1,22 +1,46 @@
 <script src=" https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
 <div id="app">
-    <p>{{ contador }}</p>
-    <button @click="somar">Somar 1</button>
-    <input type="text" :value="contador">
+    <button v-on:click="aumentar">Aumentar</button>
+    <button v-on:click="aumentar2">Aumentar</button>
+    <button v-on:click="diminuir">Diminuir</button>
+    <p>Contador: {{ contador }} </p>
+    <p>Resultado: {{ resultado }} </p>
 </div>
+
 
 <script>
     new Vue({
-        el:'#app',
+        el: '#app',
         data: {
-            contador: 0
+            contador: 0,
+            contador2:0
+        }, 
+        computed: {
+            resultado(){
+                return this.contador >= 5 ? 
+                    "Maior ou igual a 5" : "Menor que 5"
+            }
+        },
+        watch: {
+            contador(novo, antigo){
+                setTimeout(() => {
+                    this.contador = 0;
+                }, 5000);
+            }
         },
         methods: {
-            somar(){
-                debugger
+            aumentar(){
+                this.contador++
+            },
+            aumentar2(){
                 this.contador++;
+            },
+            diminuir (){
+                this.contador--
             }
+            
         }
-    })   
+    })
+    
 </script>
